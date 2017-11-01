@@ -51,7 +51,7 @@ $ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qt
 
 `${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum_data/
 
-## Interactive with `qtum-cli`
+## Interact with `qtumd` using `qtum-cli`
 
 Use following docker command to interact with your qtum node with `qtum-cli`:
 

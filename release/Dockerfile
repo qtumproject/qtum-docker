@@ -1,13 +1,17 @@
-FROM debian:stretch-slim
+FROM ubuntu
 MAINTAINER pandazwb
 
-ENV QTUM_VERSION 1.0.3
-#ENV QTUM_URL https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v1.0.3/qtum-0.14.4-x86_64-linux-gnu.tar.gz
+RUN set -ex \
+    && apt-get update \
+    && apt-get install -y -qq --no-install-recommends ca-certificates curl wget apt-utils jq
 
 # install qtum binaries
-COPY qtum-0.14.4-x86_64-linux-gnu.tar.gz /tmp/qtum.tar.gz
 RUN set -ex \
-	&& tar -xzvf /tmp/qtum.tar.gz -C /usr/local --strip-components=1 --exclude=*-qt \
+    && echo `curl -s https://api.github.com/repos/qtumproject/qtum/releases/latest | jq -r ".assets[] | select(.name | test(\"x86_64-linux-gnu.tar.gz\")) | .browser_download_url"` > /tmp/qtum_url \
+    && QTUM_URL=`cat /tmp/qtum_url` \
+    && QTUM_DIST=$(basename $QTUM_URL) \
+    && wget -O $QTUM_DIST $QTUM_URL \
+	&& tar -xzvf $QTUM_DIST -C /usr/local --strip-components=1 --exclude=*-qt \
 	&& rm /tmp/qtum*
 
 # create data directory
