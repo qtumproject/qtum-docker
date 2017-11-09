@@ -1,7 +1,7 @@
 FROM ubuntu as tools
 MAINTAINER pandazwb
 
-RUN apt-get update && apt-get install -y curl lsof wget unzip
+RUN apt-get update && apt-get install -y wget unzip
 
 RUN wget https://github.com/ethereum/solidity/releases/download/v0.4.18/solc-static-linux -O /usr/local/bin/solc && \
    chmod 0755 /usr/local/bin/solc
@@ -19,6 +19,11 @@ RUN wget https://github.com/hayeah/qtum-portal/releases/download/0.0.3/qtumporta
 # second stage
 
 FROM ubuntu
+
+RUN apt-get update && \
+  apt-get install -y curl vim-tiny less && \
+  rm -rf /var/lib/apt/lists/*
+
 ENV QTUM_DATADIR /dapp/.qtum
 ENV QTUM_RPC_USER qtum
 ENV QTUM_RPC_PASS test
@@ -30,11 +35,10 @@ COPY --from=tools /usr/local/bin /usr/local/bin
 
 COPY qcli /usr/local/bin
 COPY Procfile /Procfile
-COPY qtum.conf /root/.qtum/qtum.conf
 
 # 9888: qtumportal DApp RPC service
 # 9899: qtumportal auth service
-# 13889: qtumd RPC (don't expose)
+# 13889: qtumd RPC regtest mode (don't expose)
 EXPOSE 9888 9899
 
 WORKDIR /dapp
