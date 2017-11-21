@@ -22,11 +22,11 @@ RUN wget https://github.com/hayeah/solar/releases/download/0.0.5/solar-linux-amd
 RUN wget https://github.com/hayeah/qtum-portal/releases/download/0.0.4/qtumportal-linux -O /usr/local/bin/qtumportal && chmod 0755 /usr/local/bin/qtumportal
 
 # Use multi-stage build makes the image smaller by about 80 MB
-FROM ubuntu
+FROM jeanblanchard/alpine-glibc
 
-RUN apt-get update && \
-  apt-get install -y curl vim-tiny less && \
-  rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && \
+#   apt-get install -y curl vim-tiny less && \
+#   rm -rf /var/lib/apt/lists/*
 
 ENV QTUM_DATADIR /dapp/.qtum
 ENV QTUM_RPC_USER qtum
