@@ -11,7 +11,7 @@ RUN set -ex \
     && QTUM_URL=`cat /tmp/qtum_url` \
     && QTUM_DIST=$(basename $QTUM_URL) \
     && wget -O $QTUM_DIST $QTUM_URL \
-	&& tar -xzvf $QTUM_DIST -C /usr/local --strip-components=1 --exclude=*-qt \
+	&& tar -xzvf $QTUM_DIST -C /usr/local --strip-components=1 \
 	&& rm /tmp/qtum*
 
 # create data directory
