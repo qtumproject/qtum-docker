@@ -7,13 +7,13 @@ You might take either way:
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull oldclock/qtum:1.0.4
+$ docker pull qtum/qtum:latest
 ```
 
 ### Or, build qtum image with provided Dockerfile
 
 ```
-$docker build --rm -t oldclock/qtum:1.0.4
+$docker build --rm -t qtum/qtum:latest
 ```
 
 ## Prepare data path and qtum.conf
@@ -40,13 +40,13 @@ To launch qtum node:
 
 ```
 ## to launch qtumd
-$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:1.0.4 qtumd
+$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:latest qtumd
 
 ## check docker processed
 $ docker ps
 
 ## to stop qtumd
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:1.0.4 qtum-cli stop
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:latest qtum-cli stop
 ```
 
 `${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum_data/
@@ -56,12 +56,12 @@ $ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qt
 Use following docker command to interact with your qtum node with `qtum-cli`:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:1.0.4 qtum-cli getinfo
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:latest qtum-cli getinfo
 ```
 
 For more qtum-cli commands, use:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:1.0.4 qtum-cli help
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:latest qtum-cli help
 ```
 

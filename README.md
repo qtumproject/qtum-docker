@@ -24,12 +24,12 @@ Note: If you want to keep the latest update, please use the Dockerfile above to 
 Currently for the release version (the tag might update when latest release updates):
 
 ```
-docker pull oldclock/qtum:1.0.4
+docker pull qtum/qtum:latest
 ```
 
 And for the dev version:
 
 ```
-docker pull oldclock/qtum:dev
+docker pull qtum/qtum:dev
 ```
 
