@@ -19,7 +19,7 @@ RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-
 RUN wget https://github.com/ethereum/solidity/releases/download/v0.4.19/solc-static-linux -O /usr/local/bin/solc && \
    chmod 0755 /usr/local/bin/solc
 
-RUN wget https://github.com/hayeah/solar/releases/download/0.0.6/solar-linux-amd64 -O /usr/local/bin/solar && chmod 0755 /usr/local/bin/solar
+RUN wget https://github.com/qtumproject/solar/releases/download/0.0.7/solar-linux-amd64 -O /usr/local/bin/solar && chmod 0755 /usr/local/bin/solar
 
 RUN wget https://github.com/hayeah/qtum-portal/releases/download/0.0.4/qtumportal-linux -O /usr/local/bin/qtumportal && chmod 0755 /usr/local/bin/qtumportal
 
