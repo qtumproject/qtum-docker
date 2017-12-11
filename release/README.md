@@ -13,7 +13,7 @@ $ docker pull qtum/qtum:latest
 ### Or, build qtum image with provided Dockerfile
 
 ```
-$docker build --rm -t qtum/qtum:latest
+$docker build --rm -t qtum/qtum:latest .
 ```
 
 ## Prepare data path and qtum.conf

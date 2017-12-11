@@ -17,7 +17,7 @@ $ docker pull qtum/qtum:dev
 This is recommended since it ensures build the latest dev version.
 
 ```
-$docker build --rm -t qtum/qtum:dev
+$docker build --rm -t qtum/qtum:dev .
 ```
 
 ## Prepare data path and qtum.conf
