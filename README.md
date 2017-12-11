@@ -21,15 +21,20 @@ The docker images are also available in docker hub.
 
 Note: If you want to keep the latest update, please use the Dockerfile above to create your own image.
 
-Currently for the release version (the tag might update when latest release updates):
+The latest release version: 
 
 ```
 docker pull qtum/qtum:latest
 ```
 
-And for the dev version:
+The dev version:
 
 ```
 docker pull qtum/qtum:dev
 ```
 
+The GUI version:
+
+```
+docker pull qtum/qtum:qtum-qt
+```
