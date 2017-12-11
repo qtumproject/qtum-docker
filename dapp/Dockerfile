@@ -6,18 +6,20 @@ RUN apt-get update && \
   apt-get install -y curl vim-tiny less && \
   rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/ethereum/solidity/releases/download/v0.4.18/solc-static-linux -O /usr/local/bin/solc && \
-   chmod 0755 /usr/local/bin/solc
-
 RUN wget https://github.com/mattn/goreman/releases/download/v0.0.10/goreman_linux_amd64.zip && \
   unzip -o -d /usr/local/bin goreman_linux_amd64.zip && \
   rm goreman_linux_amd64.zip
 
-RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v1.1.1/qtum-0.14.7-x86_64-linux-gnu.tar.gz && \
-  tar -xf qtum-0.14.7-x86_64-linux-gnu.tar.gz -C /usr/local --strip-components=1 --exclude=*-qt --exclude=test_qtum --exclude=qtum-tx && \
-  rm qtum-0.14.7-x86_64-linux-gnu.tar.gz
+ENV QTUM_RELEASE qtum-0.14.10-x86_64-linux-gnu.tar.gz
 
-RUN wget https://github.com/hayeah/solar/releases/download/0.0.5/solar-linux-amd64 -O /usr/local/bin/solar && chmod 0755 /usr/local/bin/solar
+RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v1.1.4/$QTUM_RELEASE && \
+  tar -xf $QTUM_RELEASE -C /usr/local --strip-components=1 --exclude=*-qt --exclude=test_qtum --exclude=qtum-tx && \
+  rm $QTUM_RELEASE
+
+RUN wget https://github.com/ethereum/solidity/releases/download/v0.4.19/solc-static-linux -O /usr/local/bin/solc && \
+   chmod 0755 /usr/local/bin/solc
+
+RUN wget https://github.com/hayeah/solar/releases/download/0.0.6/solar-linux-amd64 -O /usr/local/bin/solar && chmod 0755 /usr/local/bin/solar
 
 RUN wget https://github.com/hayeah/qtum-portal/releases/download/0.0.4/qtumportal-linux -O /usr/local/bin/qtumportal && chmod 0755 /usr/local/bin/qtumportal
 
@@ -42,8 +44,8 @@ COPY Procfile /Procfile
 
 # 9888: qtumportal DApp RPC service
 # 9899: qtumportal auth service
-# 13889: qtumd RPC regtest mode (don't expose)
-EXPOSE 9888 9899
+# 13889: qtumd RPC
+EXPOSE 9888 9899 13889
 
 WORKDIR /dapp
 

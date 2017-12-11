@@ -1,5 +1,5 @@
-# qtumd: qtumd -regtest -rpcbind=0.0.0.0:3889 -rpcallowip=172.17.0.0/16 -datadir=$QTUM_DATADIR -logevents -rpcuser=$QTUM_RPC_USER -rpcpassword=$QTUM_RPC_PASS -reindex-chainstate -printtoconsole
+qtumd: qtumd -regtest -rpcbind=0.0.0.0:13889 -rpcallowip=172.17.0.0/16 -datadir=$QTUM_DATADIR -logevents -rpcuser=$QTUM_RPC_USER -rpcpassword=$QTUM_RPC_PASS -reindex-chainstate -printtoconsole
 
-qtumd: qtumd -regtest -datadir=$QTUM_DATADIR -rpcuser=$QTUM_RPC_USER -rpcpassword=$QTUM_RPC_PASS -logevents -reindex-chainstate -printtoconsole
+# qtumd: qtumd -regtest -datadir=$QTUM_DATADIR -rpcuser=$QTUM_RPC_USER -rpcpassword=$QTUM_RPC_PASS -logevents -reindex-chainstate -printtoconsole
 
 portal: qtumportal serve --bind=0.0.0.0 --dev
