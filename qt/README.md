@@ -44,7 +44,7 @@ User can set their own config file on demands.
 For Linux:
 
 ```
-$ docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:qtum-qt
+$ docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:qtum-qt
 ```
 
 For Mac:
@@ -64,12 +64,12 @@ $ open -a Xquartz
 ## then set Xquartz preferences "Security-'Allow connections from network clients'"
 
 ## launch qtum-qt 
-$ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:qtum-qt
+$ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:qtum-qt
 
 ```
 
 
-`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum_data/
+`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
 
 
 ## exit qtum-qt

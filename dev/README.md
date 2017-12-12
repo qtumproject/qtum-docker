@@ -44,28 +44,28 @@ To launch qtum node:
 
 ```
 ## to launch qtumd
-$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:dev qtumd
+$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtumd
 
 ## check docker processed
 $ docker ps
 
 ## to stop qtumd
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:dev qtum-cli stop
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli stop
 ```
 
-`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum_data/
+`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
 
 ## Interact with `qtumd` using `qtum-cli`
 
 Use following docker command to interact with your qtum node with `qtum-cli`:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:dev qtum-cli getinfo
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli getinfo
 ```
 
 For more qtum-cli commands, use:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/ qtum/qtum:dev qtum-cli help
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli help
 ```
 
