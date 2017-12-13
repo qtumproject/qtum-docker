@@ -46,8 +46,10 @@ COPY Procfile /Procfile
 
 # 9888: qtumportal DApp RPC service
 # 9899: qtumportal auth service
-# 13889: qtumd RPC
-EXPOSE 9888 9899 13889
+# 3889: qtumd RPC
+# 3888: peering port
+# 13888: peering port (testnet)
+EXPOSE 9888 9899 3889 3888 13888
 
 WORKDIR /dapp
 
