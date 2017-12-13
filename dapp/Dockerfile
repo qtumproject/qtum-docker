@@ -34,12 +34,14 @@ ENV QTUM_DATADIR /dapp/.qtum
 ENV QTUM_RPC_USER qtum
 ENV QTUM_RPC_PASS test
 ENV QTUM_RPC http://$QTUM_RPC_USER:$QTUM_RPC_PASS@localhost:13889
+ENV QTUM_NETWORK regtest
 
 VOLUME /dapp
 
 COPY --from=tools /usr/local/bin /usr/local/bin
 
 COPY qcli /usr/local/bin
+COPY qtumd-launch /usr/local/bin
 COPY Procfile /Procfile
 
 # 9888: qtumportal DApp RPC service
