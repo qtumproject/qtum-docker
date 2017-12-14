@@ -10,11 +10,12 @@ RUN wget https://github.com/mattn/goreman/releases/download/v0.0.10/goreman_linu
   unzip -o -d /usr/local/bin goreman_linux_amd64.zip && \
   rm goreman_linux_amd64.zip
 
-ENV QTUM_RELEASE qtum-0.14.10-x86_64-linux-gnu.tar.gz
+ENV QTUM_RELEASE 0.14.11
+ENV QTUM_RELEASE_TAR qtum-${QTUM_RELEASE}-x86_64-linux-gnu.tar.gz
 
-RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v1.1.4/$QTUM_RELEASE && \
-  tar -xf $QTUM_RELEASE -C /usr/local --strip-components=1 --exclude=*-qt --exclude=test_qtum --exclude=qtum-tx && \
-  rm $QTUM_RELEASE
+RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v${QTUM_RELEASE}/${QTUM_RELEASE_TAR} && \
+  tar -xf $QTUM_RELEASE_TAR -C /usr/local --strip-components=1 --exclude=*-qt --exclude=test_qtum --exclude=qtum-tx && \
+  rm $QTUM_RELEASE_TAR
 
 RUN wget https://github.com/ethereum/solidity/releases/download/v0.4.19/solc-static-linux -O /usr/local/bin/solc && \
    chmod 0755 /usr/local/bin/solc
