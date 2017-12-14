@@ -3,14 +3,14 @@
 set -e
 
 case $QTUM_NETWORK in
-  regtest)
+  local|regtest)
     SELECT_NETWORK=-regtest
     ;;
-  testnet)
+  test|testnet)
     SELECT_NETWORK=-testnet
     ;;
-  mainnet)
-    SELECT_NETWORK=-testnet
+  main|mainnet)
+    SELECT_NETWORK=
     ;;
   *)
     echo "Unknown network: $QTUM_NETWORK"
