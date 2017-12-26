@@ -15,11 +15,10 @@ RUN set -ex \
 
 # install qtum from github
 RUN cd /tmp && git clone --recursive https://github.com/qtumproject/qtum-bitcore.git \
-	&& cd qtum \
+	&& cd qtum-bitcore \
 	&& ./autogen.sh \
 	&& ./configure --without-gui \
 	&& make install  \
-	&& make check \
 	&& rm -rf /tmp/*
 
 # create data directory
