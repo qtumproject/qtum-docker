@@ -4,7 +4,7 @@ MAINTAINER pandazwb
 RUN set -ex \
     && apt-get update \
     && apt-get install -y -qq --no-install-recommends ca-certificates curl wget apt-utils jq \
-    && apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools
+    && apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools protobuf-compiler qrencode
 
 # install qtum binaries
 RUN set -ex \
