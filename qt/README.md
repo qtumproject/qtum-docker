@@ -4,19 +4,21 @@ This is a qtum-qt image, launch GUI wallet
 
 ## Get docker image
 
-You might take either way:
+To get the latest image, you might take either way:
 
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull qtum/qtum:qtum-qt
+$ docker pull qtum/qtum-qt
 ```
 
 ### Or, build qtum image with provided Dockerfile
 
 ```
-$docker build --rm -t qtum/qtum:qtum-qt .
+$docker build --rm -t qtum/qtum-qt .
 ```
+
+For historical versions, please visit [docker hub](https://hub.docker.com/r/qtum/qtum-qt/)
 
 ## Prepare data path & qtum.conf
 
@@ -44,7 +46,11 @@ User can set their own config file on demands.
 For Linux:
 
 ```
-$ docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:qtum-qt
+$ docker run -it --rm \
+             -v /tmp/.X11-unix:/tmp/.X11-unix \
+             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
+             -v /data/qtum-data/:/root/.qtum/ \
+             -e DISPLAY  qtum/qtum-qt
 ```
 
 For Mac:
@@ -64,7 +70,7 @@ $ open -a Xquartz
 ## then set Xquartz preferences "Security-'Allow connections from network clients'"
 
 ## launch qtum-qt 
-$ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:qtum-qt
+$ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum-qt
 
 ```
 
@@ -74,6 +80,6 @@ $ docker run -e DISPLAY=<your_ip>:0 -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v
 
 ## exit qtum-qt
 
-Just close the gui wallet.
+Exit the gui wallet in normal way.
 
 
