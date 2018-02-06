@@ -7,14 +7,16 @@ You might take either way:
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull qtum/qtum:latest
+$ docker pull qtum/qtum
 ```
 
 ### Or, build qtum image with provided Dockerfile
 
 ```
-$docker build --rm -t qtum/qtum:latest .
+$docker build --rm -t qtum/qtum .
 ```
+
+For historical versions, please visit [docker hub](https://hub.docker.com/r/qtum/qtum/)
 
 ## Prepare data path and qtum.conf
 
@@ -40,13 +42,19 @@ To launch qtum node:
 
 ```
 ## to launch qtumd
-$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:latest qtumd
+$ docker run -d --rm --name qtum_node \
+             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
+             -v /data/qtum-data/:/root/.qtum/ \
+             qtum/qtum qtumd
 
 ## check docker processed
 $ docker ps
 
 ## to stop qtumd
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:latest qtum-cli stop
+$ docker run -i --network container:qtum_node \
+             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
+             -v /data/qtum-data/:/root/.qtum/ \
+             qtum/qtum qtum-cli stop
 ```
 
 `${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
@@ -56,12 +64,18 @@ $ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qt
 Use following docker command to interact with your qtum node with `qtum-cli`:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:latest qtum-cli getinfo
+$ docker run -i --network container:qtum_node \
+             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
+             -v /data/qtum-data/:/root/.qtum/ \
+             qtum/qtum qtum-cli getinfo
 ```
 
 For more qtum-cli commands, use:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:latest qtum-cli help
+$ docker run -i --network container:qtum_node \
+             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
+             -v /data/qtum-data/:/root/.qtum/ \
+             qtum/qtum qtum-cli help
 ```
 
