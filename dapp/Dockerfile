@@ -10,7 +10,7 @@ RUN wget https://github.com/mattn/goreman/releases/download/v0.0.10/goreman_linu
   unzip -o -d /usr/local/bin goreman_linux_amd64.zip && \
   rm goreman_linux_amd64.zip
 
-ENV QTUM_RELEASE 0.14.13
+ENV QTUM_RELEASE 0.14.14
 ENV QTUM_RELEASE_TAR qtum-${QTUM_RELEASE}-x86_64-linux-gnu.tar.gz
 
 RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v${QTUM_RELEASE}/${QTUM_RELEASE_TAR} && \
@@ -20,7 +20,7 @@ RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-
 RUN wget https://github.com/ethereum/solidity/releases/download/v0.4.19/solc-static-linux -O /usr/local/bin/solc && \
    chmod 0755 /usr/local/bin/solc
 
-RUN wget -v https://github.com/qtumproject/solar/releases/download/0.0.10/solar-linux-amd64 -O /usr/local/bin/solar && chmod 0755 /usr/local/bin/solar 
+RUN wget -v https://github.com/qtumproject/solar/releases/download/0.0.11/solar-linux-amd64 -O /usr/local/bin/solar && chmod 0755 /usr/local/bin/solar 
 
 RUN wget https://github.com/qtumproject/qtumportal/releases/download/0.0.8/qtumportal-linux -O /usr/local/bin/qtumportal && chmod 0755 /usr/local/bin/qtumportal
 
