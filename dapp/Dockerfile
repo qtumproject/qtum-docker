@@ -10,7 +10,7 @@ RUN wget https://github.com/mattn/goreman/releases/download/v0.0.10/goreman_linu
   unzip -o -d /usr/local/bin goreman_linux_amd64.zip && \
   rm goreman_linux_amd64.zip
 
-ENV QTUM_RELEASE 0.14.14
+ENV QTUM_RELEASE 0.14.15
 ENV QTUM_RELEASE_TAR qtum-${QTUM_RELEASE}-x86_64-linux-gnu.tar.gz
 
 RUN wget https://github.com/qtumproject/qtum/releases/download/mainnet-ignition-v${QTUM_RELEASE}/${QTUM_RELEASE_TAR} && \
