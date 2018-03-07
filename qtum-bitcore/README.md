@@ -1,5 +1,7 @@
 # Quickstart
 
+This Dockerfile trace the latest dev version of qtum-bitcore, which is forked of Bitcore to work on Qtum - Not as well tested and primarily used for the extra RPC calls needed for the block explorer
+
 ## Get docker image
 
 You might take either way:
@@ -7,16 +9,16 @@ You might take either way:
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull qtum/qtum
+$ docker pull qtum/qtum-bitcore:latest
 ```
 
 ### Or, build qtum image with provided Dockerfile
 
-```
-$docker build --rm -t qtum/qtum .
-```
+This is recommended since it ensures build the latest dev version of qtum-bitcore.
 
-For historical versions, please visit [docker hub](https://hub.docker.com/r/qtum/qtum/)
+```
+$docker build --rm -t qtum/qtum-bitcore:latest .
+```
 
 ## Prepare data path and qtum.conf
 
@@ -42,19 +44,13 @@ To launch qtum node:
 
 ```
 ## to launch qtumd
-$ docker run -d --rm --name qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtumd
+$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum-bitcore:latest qtumd
 
 ## check docker processed
 $ docker ps
 
 ## to stop qtumd
-$ docker run -i --network container:qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli stop
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum-bitcore:latest qtum-cli stop
 ```
 
 `${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
@@ -64,18 +60,12 @@ $ docker run -i --network container:qtum_node \
 Use following docker command to interact with your qtum node with `qtum-cli`:
 
 ```
-$ docker run -i --network container:qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli getinfo
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum-bitcore:latest qtum-cli getinfo
 ```
 
 For more qtum-cli commands, use:
 
 ```
-$ docker run -i --network container:qtum_node \
-             -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
-             -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli help
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum-bitcore:latest qtum-cli help
 ```
 

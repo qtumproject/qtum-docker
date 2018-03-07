@@ -9,7 +9,7 @@ You might take either way:
 ### Pull a image from Public Docker hub
 
 ```
-$ docker pull oldclock/qtum:dev
+$ docker pull qtum/qtum:dev
 ```
 
 ### Or, build qtum image with provided Dockerfile
@@ -17,7 +17,7 @@ $ docker pull oldclock/qtum:dev
 This is recommended since it ensures build the latest dev version.
 
 ```
-$docker build --rm -t oldclock/qtum:dev
+$docker build --rm -t qtum/qtum:dev .
 ```
 
 ## Prepare data path and qtum.conf
@@ -44,28 +44,28 @@ To launch qtum node:
 
 ```
 ## to launch qtumd
-$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:dev qtumd
+$ docker run -d --rm --name qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtumd
 
 ## check docker processed
 $ docker ps
 
 ## to stop qtumd
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:dev qtum-cli stop
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli stop
 ```
 
-`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum_data/
+`${PWD}/qtum.conf` will be used, and blockchain data saved under /data/qtum-data/
 
 ## Interact with `qtumd` using `qtum-cli`
 
 Use following docker command to interact with your qtum node with `qtum-cli`:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:dev qtum-cli getinfo
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli getinfo
 ```
 
 For more qtum-cli commands, use:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum_data/:/root/.qtum/oldclock/qtum:dev qtum-cli help
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli help
 ```
 
