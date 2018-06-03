@@ -1,4 +1,4 @@
 .PHONY: image
 
 image:
-	docker build . -t hayeah/qtumportal
+	docker build . -t y0uz45/qtumportal
