@@ -51,27 +51,34 @@ Or you can choose an existing path that includes those source file.
 
 ## run x86compiler container
 
-By default, it will show the gcc version:
+First check the gcc version:
 
 ```
-$ docker run -d --rm qtum/x86compiler
+$ docker run --rm qtum/x86compiler i386-qtum-gcc -v
 
 ## result:
 
+Using built-in specs.
+COLLECT_GCC=i386-qtum-gcc
+COLLECT_LTO_WRAPPER=/opt/cross/libexec/gcc/i386-qtum/7.2.0/lto-wrapper
+Target: i386-qtum
+Configured with: ../gcc-7.2.0/configure --target=i386-qtum --prefix=/opt/cross --with-sysroot=/root/x86-compiler/sysroot --enable-languages=c
+Thread model: single
+gcc version 7.2.0 (GCC) 
 
 ```
 
 To use i386-qtum-gcc:
 
 ```
-$ docker run -d --rm  \
+$ docker run --rm  \
              -v /data/qtum-x86-data/:/data/ \
              qtum/x86compiler \
              i386-qtum-gcc /data/test.c -o /data/test.elf
 ```
 
 Since the `/data/qtum-x86-data` is mounted to /data in the container, this will compile test.c in the path and create
-create test.elf in the same path.
+create output file test.elf in the same path.
 
 
 ## Interactive run

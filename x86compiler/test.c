@@ -12,6 +12,10 @@ char* data="\n\n\n \
             ***********\n \
             \n\n\n";
 
+void onCreate() {
+    //for test only
+}
+
 int main(){
     __qtum_syscall(INTERNAL_PRINT, (long) data, 200, 0, 0, 0, 0);
     return 1;
