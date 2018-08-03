@@ -1,5 +1,0 @@
-qtumd: qtumd-launch
-
-portal: qtumportal serve --bind=0.0.0.0 --dev
-
-janus: janus --qtum-rpc="http://${QTUM_RPC_USER}:${QTUM_RPC_PASS}@localhost:3889" --bind=0.0.0.0 --port=23889 --dev

@@ -6,10 +6,6 @@ RUN apt-get update && \
   apt-get install -y curl vim-tiny less && \
   rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/mattn/goreman/releases/download/v0.0.10/goreman_linux_amd64.zip && \
-  unzip -o -d /usr/local/bin goreman_linux_amd64.zip && \
-  rm goreman_linux_amd64.zip
-
 ENV QTUM_RELEASE 0.15.2
 ENV QTUM_RELEASE_TAR qtum-${QTUM_RELEASE}-x86_64-linux-gnu.tar.gz
 
@@ -33,6 +29,7 @@ FROM jeanblanchard/alpine-glibc
 #   apt-get install -y curl vim-tiny less && \
 #   rm -rf /var/lib/apt/lists/*
 
+RUN apk --no-cache add supervisor
 ENV QTUM_DATADIR /dapp/.qtum
 ENV QTUM_RPC_USER qtum
 ENV QTUM_RPC_PASS test
@@ -43,9 +40,10 @@ VOLUME /dapp
 
 COPY --from=tools /usr/local/bin /usr/local/bin
 
+
 COPY qcli /usr/local/bin
 COPY qtumd-launch /usr/local/bin
-COPY Procfile /Procfile
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # 9888: qtumportal DApp RPC service
 # 9899: qtumportal auth service
@@ -59,4 +57,4 @@ WORKDIR /dapp
 
 # 172.17.0.0/16 is the network submask for docker's bridge network.
 # -rpcallowip=172.17.0.0/16 permits RPC access from docker host
-CMD mkdir -p $QTUM_DATADIR && goreman -f /Procfile start
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
