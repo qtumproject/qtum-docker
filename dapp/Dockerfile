@@ -20,7 +20,7 @@ RUN wget -v https://github.com/qtumproject/solar/releases/download/0.0.14/solar-
 
 RUN wget https://github.com/qtumproject/qtumportal/releases/download/0.0.8/qtumportal-linux -O /usr/local/bin/qtumportal && chmod 0755 /usr/local/bin/qtumportal
 
-RUN wget -v https://github.com/dcb9/janus/releases/download/0.0.2/janus-linux-amd64 -O /usr/local/bin/janus && chmod 0755 /usr/local/bin/janus
+RUN wget -v https://github.com/dcb9/janus/releases/download/0.0.6/janus-linux-amd64 -O /usr/local/bin/janus && chmod 0755 /usr/local/bin/janus
 
 # Use multi-stage build makes the image smaller by about 80 MB
 FROM jeanblanchard/alpine-glibc
@@ -44,6 +44,9 @@ COPY --from=tools /usr/local/bin /usr/local/bin
 COPY qcli /usr/local/bin
 COPY qtumd-launch /usr/local/bin
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+## local test
+#COPY janus-linux-amd64 /usr/local/bin/janus
 
 # 9888: qtumportal DApp RPC service
 # 9899: qtumportal auth service
