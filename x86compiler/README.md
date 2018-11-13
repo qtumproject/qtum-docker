@@ -5,15 +5,14 @@ environments are included in the docker image, and developers can use this compi
 
 ## About Qtum x86-toolchain
 
-Currently, x86-toolchain is a GNU GCC and friends toolchain modified to support the "i386-qtum" target. This means that after building this, it is possible to simply do:
+Currently, x86-toolchain is a GNU GCC and friends toolchain modified to support the "i686-qtum" target. This means that after building this, it is possible to simply do:
 
 ```
-i386-qtum-gcc test.c -o contract
+i686-qtum-gcc test.c -o contract
 ```
 
 And the "contract" file that is outputed will be capable of being used with the x86Lib testbench program (and later deployed to Qtum's blockchain)
 
-Note: even though x86Lib will later support i686, right now there is only i386 support.. so only target this!
 
 ## Get docker image
 
@@ -54,27 +53,26 @@ Or you can choose an existing path that includes those source file.
 First check the gcc version:
 
 ```
-$ docker run --rm qtum/x86compiler i386-qtum-gcc -v
+$ docker run --rm qtum/x86compiler i686-qtum-gcc -v
 
 ## result:
-
 Using built-in specs.
-COLLECT_GCC=i386-qtum-gcc
-COLLECT_LTO_WRAPPER=/opt/cross/libexec/gcc/i386-qtum/7.2.0/lto-wrapper
-Target: i386-qtum
-Configured with: ../gcc-7.2.0/configure --target=i386-qtum --prefix=/opt/cross --with-sysroot=/root/x86-compiler/sysroot --enable-languages=c
+COLLECT_GCC=i686-qtum-gcc
+COLLECT_LTO_WRAPPER=/opt/cross/libexec/gcc/i686-qtum/7.2.0/lto-wrapper
+Target: i686-qtum
+Configured with: ../gcc-7.2.0/configure --target=i686-qtum --prefix=/opt/cross --with-sysroot=/root/x86-compiler/sysroot --enable-languages=c,c++
 Thread model: single
-gcc version 7.2.0 (GCC) 
+gcc version 7.2.0 (GCC)
 
 ```
 
-To use i386-qtum-gcc:
+To use i686-qtum-gcc:
 
 ```
 $ docker run --rm  \
              -v /data/qtum-x86-data/:/data/ \
              qtum/x86compiler \
-             i386-qtum-gcc /data/test.c -o /data/test.elf
+             i686-qtum-gcc /data/test.c -o /data/test.elf
 ```
 
 Since the `/data/qtum-x86-data` is mounted to /data in the container, this will compile test.c in the path and create
@@ -95,7 +93,7 @@ $ docker run --rm -it \
 Then you can use the bash of the container just like in Ubuntu command line:
 
 ```
-root@11d4d98b45f1:/# i386-qtum-gcc /data/test.c -o /data/test.elf
+root@11d4d98b45f1:/# i686-qtum-gcc /data/test.c -o /data/test.elf
 ```
 
 For the local machine, the output files will also be placed in the path passed by -v option. (here it is /data/qtum-x86-data/).

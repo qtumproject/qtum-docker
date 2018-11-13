@@ -28,4 +28,4 @@ RUN set -ex \
     && rm -rf $HOME/libqtum
 
 
-CMD ["i386-qtum-gcc -v"]
+CMD ["i686-qtum-gcc","-v"]
