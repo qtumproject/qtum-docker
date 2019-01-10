@@ -2,4 +2,4 @@
 
 
 # bytecode, gaslimit, gasprice, senderaddress, broadcast
-~/qcli createcontract "$@"
+qcli createcontract "$@"
