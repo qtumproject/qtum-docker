@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+# bytecode, gaslimit, gasprice, senderaddress, broadcast
+~/qcli createcontract "$@"
