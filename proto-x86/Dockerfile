@@ -22,11 +22,6 @@ RUN set -ex \
     && git checkout $BRANCH
 
 
-#get libc
-RUN set -ex \
-    && git clone $REPO_PREFIX/FsLibc \
-    && cd FsLibc \
-    && git checkout $BRANCH
 
 
 ENV PREFIX=/opt/cross
@@ -51,6 +46,11 @@ RUN set -ex \
     && make install-gcc \
     && make install-target-libgcc
 
+#get libc
+RUN set -ex \
+    && git clone $REPO_PREFIX/FsLibc \
+    && cd FsLibc \
+    && git checkout $BRANCH
 
 ENV TARGET=i686-qtum
 
