@@ -19,7 +19,7 @@ ENV MAKE_SUFFIX=-j2
 RUN set -ex \
     && git clone $REPO_PREFIX/x86-toolchain \
     && cd x86-toolchain \
-    && git checkout $BRANCH \
+    && git checkout $BRANCH
 
 
 #get libc
