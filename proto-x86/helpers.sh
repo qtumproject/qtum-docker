@@ -14,7 +14,7 @@ alias qx86cli='docker exec qx86 qcli'
 function qx86deploy() {
     docker exec -t qx86 deploy_contract `hexdump -e \"%x\" $1` 
 }
-export -f qtumdeploy
+export -f qx86deploy
 
 function qx86tb() {
     docker run --rm -v "${PWD}:/root/bind" qtumx86 x86tb
