@@ -9,51 +9,25 @@ RUN set -emx \
     && apt-get update \
     && apt-get install libdb4.8-dev libdb4.8++-dev -y -qq --no-install-recommends
 
+
 ENV REPO_PREFIX=https://github.com/qtumproject
 ENV BRANCH=proto-x86
-
 ENV MAKE_SUFFIX=-j2
+
 
 # get x86-toolchain source
 RUN set -ex \
     && git clone $REPO_PREFIX/x86-toolchain \
     && cd x86-toolchain \
     && git checkout $BRANCH \
-    && cd .. \
-    && git clone $REPO_PREFIX/libqtum \
-    && cd libqtum \
-    && git checkout $BRANCH \
-    && cd .. \
+
+
+#get libc
+RUN set -ex \
     && git clone $REPO_PREFIX/FsLibc \
     && cd FsLibc \
-    && git checkout $BRANCH \
-    && cd ..
-
-# get qtum source
-RUN set -ex \
-    && git clone $REPO_PREFIX/qtum --recursive \
-    && cd qtum \
     && git checkout $BRANCH
 
-# get docker helpers
-RUN set -ex \
-    && git clone $REPO_PREFIX/qtum-docker \
-    && cd qtum-docker \
-    && git checkout $BRANCH
-
-# build qtum etc first, as the toolchain takes much longer
-
-# build qtum
-RUN set -ex \
-    && cd qtum \
-    && ./autogen.sh \
-    && ./configure \
-    && make $MAKE_SUFFIX
-
-# build x86lib utility
-RUN set -ex \
-    && cd qtum/src/x86lib \ 
-    && make $MAKE_SUFFIX
 
 ENV PREFIX=/opt/cross
 ENV TARGET=i686-elf
@@ -111,12 +85,43 @@ RUN set -ex \
     && make install-gcc \
     && make install-target-libgcc
 
+
+# get qtum source
+RUN set -ex \
+    && git clone $REPO_PREFIX/qtum --recursive \
+    && cd qtum \
+    && git checkout $BRANCH
+
+# build qtum
+RUN set -ex \
+    && cd qtum \
+    && ./autogen.sh \
+    && ./configure --disable-tests --without-gui \
+    && make $MAKE_SUFFIX
+
+# build x86lib utility
+RUN set -ex \
+    && cd qtum/src/x86lib \ 
+    && make $MAKE_SUFFIX
+
+
+# get libqtum
+RUN set -ex \
+    && git clone $REPO_PREFIX/libqtum \
+    && cd libqtum \
+    && git checkout $BRANCH
+
 # build libqtum
 RUN set -ex \
     && cd libqtum \
     && make \
     && make deploy
 
+# get docker helpers
+RUN set -ex \
+    && git clone $REPO_PREFIX/qtum-docker \
+    && cd qtum-docker \
+    && git checkout $BRANCH
 
 # create data directory
 ENV QTUM_DATA /data
