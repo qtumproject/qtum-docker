@@ -1,6 +1,0 @@
-#!/bin/bash
-
-~/qtum/src/qtum-cli -regtest stop
-wait 2
-rm -rf ~/.qtum/regtest
-~/qtum/src/qtumd -daemon -regtest -logevents
