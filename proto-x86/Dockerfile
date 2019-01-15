@@ -131,8 +131,8 @@ RUN set -ex \
 
 #clean up
 RUN set -ex \
-    && rm -rf qtum-compile
-    && rm -rf x86-toolchain \
+    && rm -rf qtum-compile \
+    && rm -rf x86-toolchain
 
 # create data directory
 ENV QTUM_DATA /data
