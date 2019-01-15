@@ -27,7 +27,7 @@ RUN set -ex \
 ENV PREFIX=/opt/cross
 ENV TARGET=i686-elf
 ENV SYSROOT=/opt/x86-compiler/sysroot
-ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/qtum/src:/root/qtum/src/x86lib:/root/qtum-docker/proto-x86/utils
+ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/qtum:/root/qtum:/root/qtum-docker/proto-x86/utils
 
 # build the freestanding compiler
 RUN set -ex \
@@ -86,24 +86,30 @@ RUN set -ex \
     && make install-target-libgcc
 
 
+
 # get qtum source
 RUN set -ex \
-    && git clone $REPO_PREFIX/qtum --recursive \
-    && cd qtum \
+    && git clone $REPO_PREFIX/qtum qtum-compile --recursive \
+    && cd qtum-compile \
     && git checkout $BRANCH
 
 # build qtum
 RUN set -ex \
-    && cd qtum \
+    && cd qtum-compile \
     && ./autogen.sh \
     && ./configure --disable-tests --without-gui \
     && make $MAKE_SUFFIX
 
 # build x86lib utility
 RUN set -ex \
-    && cd qtum/src/x86lib \ 
+    && cd qtum-compile/src/x86lib \ 
     && make $MAKE_SUFFIX
 
+#install qtum tools
+RUN set -ex \
+    && cd qtum-compile \
+    && mkdir /root/qtum \
+    && cp src/qtumd src/qtum-cli src/qtum-tx src/x86lib/x86testbench /root/qtum
 
 # get libqtum
 RUN set -ex \
@@ -122,6 +128,11 @@ RUN set -ex \
     && git clone $REPO_PREFIX/qtum-docker \
     && cd qtum-docker \
     && git checkout $BRANCH
+
+#clean up
+RUN set -ex \
+    && rm -rf qtum-compile
+    && rm -rf x86-toolchain \
 
 # create data directory
 ENV QTUM_DATA /data

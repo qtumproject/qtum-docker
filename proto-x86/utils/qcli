@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd ~/bind
-~/qtum/src/qtum-cli -regtest "$@"
+~/qtum/qtum-cli -regtest "$@"

@@ -12,7 +12,7 @@ export -f qx86stop
 alias qx86cli='docker exec qx86 qcli'
 
 function qx86deploy() {
-    docker exec -t qx86 deploy_contract `hexdump -e \"%x\" $1` 
+    docker exec -t qx86 deploy_contract `cat $1`
 }
 export -f qx86deploy
 
@@ -25,3 +25,4 @@ function qx86make() {
     docker run --rm -v "${PWD}:/root/bind" qtumx86 qmake "$@"
 }
 export -f qx86make
+
