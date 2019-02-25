@@ -1,6 +1,6 @@
 #!/bin/bash
 function qx86start() {
-    docker run --rm -v "${PWD}:/root/bind" --name qx86 -d qtumx86 qtum/src/qtumd -regtest -logevents
+    docker run --rm -v "${PWD}:/root/bind" --name qx86 -d qtumx86 qtum/qtumd -regtest -logevents
 }
 export -f qx86start
 
