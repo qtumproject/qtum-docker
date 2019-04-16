@@ -26,3 +26,8 @@ function qx86make() {
 }
 export -f qx86make
 
+function qx86simpleabi() {
+    docker run -it -v "${PWD}:/root/bind" -w /root/bind qtumx86 SimpleABI -a "$1" -d -e
+}
+
+export -f qx86simpleabi
