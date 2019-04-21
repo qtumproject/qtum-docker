@@ -1,10 +1,10 @@
 FROM ubuntu
-MAINTAINER earlz
+LABEL maintainers "earlz, VoR0220"
 
 WORKDIR /root
 RUN set -emx \
     && apt-get update \
-    && apt-get install -y -qq --no-install-recommends ca-certificates curl wget apt-utils build-essential git libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev software-properties-common texinfo bison flex libmpc-dev libmpfr-dev libgmp3-dev yasm \
+    && apt-get install -y -qq --no-install-recommends ca-certificates curl wget apt-utils build-essential git libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev software-properties-common texinfo bison flex libmpc-dev libmpfr-dev libgmp3-dev yasm golang-go\
     && add-apt-repository ppa:bitcoin/bitcoin -y \
     && apt-get update \
     && apt-get install libdb4.8-dev libdb4.8++-dev -y -qq --no-install-recommends
@@ -27,7 +27,7 @@ RUN set -ex \
 ENV PREFIX=/opt/cross
 ENV TARGET=i686-elf
 ENV SYSROOT=/opt/x86-compiler/sysroot
-ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/qtum:/root/qtum:/root/qtum-docker/proto-x86/utils
+ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/qtum:/root/qtum:/root/qtum-docker/proto-x86/utils:/root/go/bin
 
 # build the freestanding compiler
 RUN set -ex \
@@ -122,6 +122,9 @@ RUN set -ex \
     && cd libqtum \
     && make \
     && make deploy
+
+# get simpleabi (this url should change in the future)
+RUN go get -u github.com/qtumproject/SimpleABI && go install github.com/qtumproject/SimpleABI
 
 # get docker helpers
 RUN set -ex \
