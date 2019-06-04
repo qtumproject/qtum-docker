@@ -1,0 +1,17 @@
+FROM alpine-dev
+LABEL maintainers "earlz, VoR0220"
+
+ENV REPO_PREFIX=https://github.com/qtumproject
+ENV BRANCH=proto-x86
+
+RUN git clone $REPO_PREFIX/x86-toolchain \
+    && cd x86-toolchain \
+    && git checkout $BRANCH
+RUN git clone $REPO_PREFIX/FsLibc && cd FsLibc && git checkout $BRANCH
+RUN git clone $REPO_PREFIX/qtum qtum-compile --recursive && cd qtum-compile  \
+			&& git checkout $BRANCH
+# get libqtum
+RUN set -ex \
+    && git clone $REPO_PREFIX/libqtum \
+    && cd libqtum \
+    && git checkout $BRANCH

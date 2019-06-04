@@ -1,0 +1,12 @@
+FROM alpine:3.9.4
+LABEL maintainers "earlz, VoR0220"
+
+RUN apk update && apk add git \
+							make \
+							cmake \
+							musl	\
+							alpine-sdk \
+							texinfo \
+							bison \
+							flex \
+							yasm
