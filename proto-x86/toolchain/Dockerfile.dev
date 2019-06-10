@@ -9,4 +9,16 @@ RUN apk update && apk add git \
 							texinfo \
 							bison \
 							flex \
-							yasm
+							yasm \
+							perl-utils \
+							autoconf \
+							automake \
+							libtool \
+							db-dev \
+							boost \
+							boost-system \
+                          	boost-program_options \
+                          	boost-filesystem \ 
+                          	boost-dev \ 
+							openssl-dev \
+							libevent-dev
