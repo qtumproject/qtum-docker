@@ -9,4 +9,5 @@ RUN (cd qtum && ./autogen.sh && \
                       strip src/qtumd && \
                       strip src/qtum-cli && \
                       strip src/qtum-tx && \
-                      make install && make clean && make distclean)
+                      make install && make clean && make distclean && \
+                      cd src/x86lib && make)

@@ -8,6 +8,7 @@ FROM alpine
 #
 COPY --from=build /usr/local/bin/qtumd /usr/local/bin
 COPY --from=build /usr/local/bin/qtum-cli /usr/local/bin
+COPY --from=build /qtum/src/x86lib/x86testbench /usr/local/bin/x86testbench
 #
 # Install all dependencies
 #
@@ -24,6 +25,6 @@ RUN apk update && apk add boost boost-filesystem \
 #
 COPY qtum.conf /qtum.conf
 
-EXPOSE  3888/tcp
-ENTRYPOINT ["/usr/local/bin/qtumd"]
-CMD ["-conf=/qtum.conf", "-regtest", "-rest=1", "-server=1", "-printtoconsole", "-txindex=1"]
+EXPOSE 3888 3889 13888 13889
+ENV PATH=${PATH}:/usr/local/bin:
+CMD ["qtumd", "-conf=/qtum.conf", "-regtest", "-logevents", "-rest=1", "-server=1", "-printtoconsole", "-txindex=1"]
