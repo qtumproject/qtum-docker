@@ -25,6 +25,12 @@ RUN apk update && apk add boost boost-filesystem \
 #
 COPY qtum.conf /qtum.conf
 
+# create data directory
+ENV QTUM_DATA /data
+RUN mkdir $QTUM_DATA \
+    && ln -sfn $QTUM_DATA /.qtum
+VOLUME /data
+
 EXPOSE 3888 3889 13888 13889
 ENV PATH=${PATH}:/usr/local/bin:
-CMD ["qtumd", "-conf=/qtum.conf", "-regtest", "-logevents", "-rest=1", "-server=1", "-printtoconsole", "-txindex=1"]
+CMD ["qtumd", "-regtest", "-logevents", "-printtoconsole"]
