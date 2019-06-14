@@ -1,2 +1,2 @@
 FROM alpine-dev
-RUN set -ex && git clone https://github.com/qtumproject/qtum.git --recursive && cd qtum && git checkout proto-x86
+RUN set -ex && git clone https://github.com/qtumproject/qtum-x86.git --recursive && cd qtum && git checkout qtum-x86
