@@ -5,6 +5,10 @@ ENV TARGET=i686-elf
 ENV SYSROOT=/opt/x86-compiler/sysroot
 ENV PATH=${PATH}:${SYSROOT}/bin:$PREFIX/bin:/root/qtum:/root/qtum:/root/qtum-docker/proto-x86/utils
 
+RUN set -ex \
+    && cd qx86-codeify \
+    && make -j4 
+
 # build the freestanding compiler
 RUN set -ex \
     && cd x86-toolchain \
@@ -88,10 +92,10 @@ RUN apk --no-cache add make \
                             boost-dev 
 
 COPY --from=0 /lib /lib
+COPY --from=0 /qx86-codeify/qx86-codeify /usr/local/bin
 COPY --from=0 /opt/cross /opt/cross
 COPY --from=0 /opt/x86-compiler/sysroot /opt/x86-compiler/sysroot
 COPY --from=0 /usr/include /usr/include
-COPY --from=qtum-alpine /usr/local/bin/x86testbench ./usr/local/bin
 
 ENV PATH=${PATH}:/opt/x86-compiler/sysroot/bin:/opt/cross/bin:/root/qtum:/usr/local/bin
 ENV CC=i686-qtum-gcc

@@ -16,7 +16,7 @@ LDFLAGS += -Wl,--gc-section
 default: $(BYTECODE)
 
 $(BYTECODE): $(OUTPUT)
-	x86testbench -assemble -raw $(OUTPUT) > $(BYTECODE)
+	qx86-codeify -elf $(OUTPUT) -hex -o $(BYTECODE)
 
 $(OUTPUT): $(C_OBJS)
 	$(CC) $(LDFLAGS) -o $(OUTPUT) $(C_OBJS) $(LIBS)
