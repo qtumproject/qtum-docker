@@ -16,8 +16,7 @@ RUN apk update && apk add boost boost-filesystem \
     boost-system boost-thread \
     boost-random busybox db-c++ \
     libevent libgcc libressl2.7-libcrypto \ 
-    libstdc++ musl \
-    gdb
+    libstdc++ musl
 
 #
 # Copy the qtum.conf file from

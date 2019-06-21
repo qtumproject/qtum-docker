@@ -1,6 +1,6 @@
 FROM qtum-alpine-build
 RUN (cd qtum-x86 && ./autogen.sh && \
-                      ./configure --enable-debug --disable-tests \
+                      ./configure --disable-tests \
                       --disable-bench --disable-static  \
                       --without-gui --disable-zmq \ 
                       --with-incompatible-bdb \
