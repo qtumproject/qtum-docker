@@ -66,17 +66,17 @@ RUN set -ex \
     && cd qtum-compile \
     && ./autogen.sh \
     && ./configure --disable-tests --without-gui --with-incompatible-bdb\
-    && make $MAKE_SUFFIX
+    && make -j4
 
 # build x86lib utility
 RUN set -ex \
     && cd qtum-compile/src/x86lib \ 
-    && make $MAKE_SUFFIX
+    && make -j4
 
 # build libqtum
 RUN set -ex \
     && cd libqtum \
-    && make \
+    && make -j2 \
     && make deploy \
     && make deploy
 
@@ -84,12 +84,7 @@ FROM alpine:3.9.4
 
 RUN apk --no-cache add make \
                             musl \
-                            db-dev \
-                            boost \ 
-                            boost-system \
-                            boost-program_options \
-                            boost-filesystem \
-                            boost-dev 
+                            db-dev
 
 COPY --from=0 /lib /lib
 COPY --from=0 /qx86-codeify/qx86-codeify /usr/local/bin

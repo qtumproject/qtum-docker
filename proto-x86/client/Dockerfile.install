@@ -1,6 +1,6 @@
 FROM qtum-alpine-build
-RUN (cd qtum && ./autogen.sh && \
-                      ./configure --disable-tests \
+RUN (cd qtum-x86 && ./autogen.sh && \
+                      ./configure --enable-debug --disable-tests \
                       --disable-bench --disable-static  \
                       --without-gui --disable-zmq \ 
                       --with-incompatible-bdb \
@@ -9,5 +9,4 @@ RUN (cd qtum && ./autogen.sh && \
                       strip src/qtumd && \
                       strip src/qtum-cli && \
                       strip src/qtum-tx && \
-                      make install && make clean && make distclean && \
-                      cd src/x86lib && make)
+                      make install && make clean && make distclean)

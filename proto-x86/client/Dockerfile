@@ -8,7 +8,6 @@ FROM alpine
 #
 COPY --from=build /usr/local/bin/qtumd /usr/local/bin
 COPY --from=build /usr/local/bin/qtum-cli /usr/local/bin
-COPY --from=build /qtum/src/x86lib/x86testbench /usr/local/bin/x86testbench
 #
 # Install all dependencies
 #
@@ -17,7 +16,8 @@ RUN apk update && apk add boost boost-filesystem \
     boost-system boost-thread \
     boost-random busybox db-c++ \
     libevent libgcc libressl2.7-libcrypto \ 
-    libstdc++ musl
+    libstdc++ musl \
+    gdb
 
 #
 # Copy the qtum.conf file from
