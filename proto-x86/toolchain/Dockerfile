@@ -61,18 +61,6 @@ RUN set -ex \
     && make install-gcc \
     && make install-target-libgcc
 
-# build qtum
-RUN set -ex \
-    && cd qtum-compile \
-    && ./autogen.sh \
-    && ./configure --disable-tests --without-gui --with-incompatible-bdb\
-    && make -j4
-
-# build x86lib utility
-RUN set -ex \
-    && cd qtum-compile/src/x86lib \ 
-    && make -j4
-
 # build libqtum
 RUN set -ex \
     && cd libqtum \

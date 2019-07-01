@@ -6,8 +6,6 @@ ENV BRANCH=proto-x86
 
 RUN git clone $REPO_PREFIX/x86-toolchain
 RUN git clone $REPO_PREFIX/FsLibc && cd FsLibc && git checkout $BRANCH
-RUN git clone $REPO_PREFIX/qtum qtum-compile --recursive && cd qtum-compile  \
-			&& git checkout $BRANCH
 RUN git clone $REPO_PREFIX/qx86-codeify 
 # get libqtum
 RUN set -ex \
