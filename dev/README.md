@@ -60,7 +60,7 @@ $ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qt
 Use following docker command to interact with your qtum node with `qtum-cli`:
 
 ```
-$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli getinfo
+$ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli getblockchaininfo
 ```
 
 For more qtum-cli commands, use:

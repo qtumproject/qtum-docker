@@ -14,10 +14,10 @@ RUN set -ex \
  	&& rm -rf /var/lib/apt/lists/*
 
 # install qtum from github
-RUN cd /tmp && git clone --recursive https://github.com/qtumproject/qtum-bitcore.git \
-	&& cd qtum-bitcore \
+RUN cd /tmp && git clone --recursive https://github.com/qtumproject/qtum.git \
+	&& cd qtum \
 	&& ./autogen.sh \
-	&& ./configure --without-gui \
+	&& ./configure --enable-bitcore-rpc --without-gui \
 	&& make install  \
 	&& rm -rf /tmp/*
 
