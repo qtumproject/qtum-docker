@@ -1,0 +1,12 @@
+FROM qtum-alpine-build
+RUN (cd qtum-x86 && ./autogen.sh && \
+                      ./configure \
+                      --disable-bench --disable-static  \
+                      --without-gui --disable-zmq \ 
+                      --with-incompatible-bdb \
+                      CFLAGS='-w' CXXFLAGS='-w' && \
+                      make -j 4 && \
+                      strip src/qtumd && \
+                      strip src/qtum-cli && \
+                      strip src/qtum-tx && \
+                      make install && make check && make clean && make distclean)

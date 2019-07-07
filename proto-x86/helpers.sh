@@ -1,6 +1,6 @@
 #!/bin/bash
 function qx86start() {
-    docker run --rm -v "${PWD}:/root/bind" --name qx86 -d qtumx86 qtum/src/qtumd -regtest -logevents
+    docker run --rm -v "${PWD}:/root/bind" --name qx86 -d qtum-alpine qtumd -regtest -logevents -printtoconsole
 }
 export -f qx86start
 
@@ -9,20 +9,20 @@ function qx86stop() {
 }
 export -f qx86stop
 
-alias qx86cli='docker exec qx86 qcli'
+alias qx86cli='docker  exec qx86 qtum-cli -regtest'
 
 function qx86deploy() {
-    docker exec -t qx86 deploy_contract `cat $1`
+    docker exec -t qx86 qtum-cli -regtest createcontract `cat $1`
 }
 export -f qx86deploy
 
-function qx86tb() {
-    docker run --rm -v "${PWD}:/root/bind" qtumx86 x86tb
-}
-export -f qx86tb
-
 function qx86make() {
-    docker run --rm -v "${PWD}:/root/bind" qtumx86 qmake "$@"
+    docker run --rm -v "${PWD}:/root/bind" -w "/root/bind" qtumtoolchain-alpine make
 }
 export -f qx86make
 
+function qx86simpleabi() {
+    docker run --rm -it -v "${PWD}:/root/bind" -w /root/bind qtum-simpleabi -a "$1" -d -e
+}
+
+export -f qx86simpleabi
