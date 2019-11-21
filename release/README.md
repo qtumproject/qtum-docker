@@ -35,6 +35,10 @@ Create your config file, refer to the example [qtum.conf]!(https://github.com/qt
 ```
 rpcuser=qtum
 rpcpassword=qtumtest
+
+# This will allow you to RPC from your localhost outside the container
+rpcallowip=0.0.0.0/0
+rpcbind=0.0.0.0
 ```
 ## Launch qtumd
 
@@ -54,6 +58,7 @@ $ docker ps
 $ docker run -i --network container:qtum_node \
              -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
              -v /data/qtum-data/:/root/.qtum/ \
+             -p 127.0.0.1:3889:3889 \
              qtum/qtum qtum-cli stop
 ```
 
@@ -67,7 +72,7 @@ Use following docker command to interact with your qtum node with `qtum-cli`:
 $ docker run -i --network container:qtum_node \
              -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
              -v /data/qtum-data/:/root/.qtum/ \
-             qtum/qtum qtum-cli getinfo
+             qtum/qtum qtum-cli getblockchaininfo
 ```
 
 For more qtum-cli commands, use:
@@ -77,5 +82,13 @@ $ docker run -i --network container:qtum_node \
              -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf \
              -v /data/qtum-data/:/root/.qtum/ \
              qtum/qtum qtum-cli help
+```
+
+## RPC from outside container
+
+While the qtum node container is running, you can do RPC outside the container on your localhost like this:
+
+```
+curl -i --user qtum:qtumtest --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchaininfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:3889/
 ```
 
