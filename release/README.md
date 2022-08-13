@@ -16,6 +16,11 @@ $ docker pull qtum/qtum
 $docker build --rm -t qtum/qtum .
 ```
 
+### Or, build a multi-arch container image
+```
+docker buildx build --platform linux/arm64,linux/amd64,linux/riscv64,linux/ppc64le,linux/arm/v7 -t qtum/qtum .
+```
+
 For historical versions, please visit [docker hub](https://hub.docker.com/r/qtum/qtum/)
 
 ## Prepare data path and qtum.conf
