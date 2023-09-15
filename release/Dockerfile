@@ -1,5 +1,4 @@
 FROM ubuntu
-MAINTAINER pandazwb
 
 RUN set -ex \
     && apt-get update \
