@@ -69,3 +69,18 @@ For more qtum-cli commands, use:
 $ docker run -i --network container:qtum_node -v ${PWD}/qtum.conf:/root/.qtum/qtum.conf -v /data/qtum-data/:/root/.qtum/ qtum/qtum:dev qtum-cli help
 ```
 
+## Build docker image for release binaries and push to docker hub
+
+- optionally, create a new qtum builder instance that supports multi-arch:
+
+```
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+docker buildx create --name multiarch-builder --use
+docker buildx inspect --bootstrap
+```
+
+- build and push docker image for release binaries:
+```
+cd dev
+docker buildx build -f Dockerfile.release-binaries --platform linux/arm64,linux/amd64,linux/ppc64le,linux/arm/v7 -t qtum/qtum:latest -t qtum/qtum:27.1 . --push
+```
