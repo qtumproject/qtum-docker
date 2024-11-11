@@ -1,0 +1,53 @@
+# Use Ubuntu as base
+FROM ubuntu:22.04
+
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y curl ca-certificates  file && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set version and platform-specific download URLs
+ARG QTUM_VERSION=27.1
+ARG QTUM_AARCH64_URL="https://github.com/qtumproject/qtum/releases/download/v${QTUM_VERSION}/qtum-${QTUM_VERSION}-aarch64-linux-gnu.tar.gz"
+ARG QTUM_ARMV7_URL="https://github.com/qtumproject/qtum/releases/download/v${QTUM_VERSION}/qtum-${QTUM_VERSION}-arm-linux-gnueabihf.tar.gz"
+ARG QTUM_AMD64_URL="https://github.com/qtumproject/qtum/releases/download/v${QTUM_VERSION}/qtum-${QTUM_VERSION}-x86_64-linux-gnu.tar.gz"
+ARG QTUM_PPC64LE_URL="https://github.com/qtumproject/qtum/releases/download/v${QTUM_VERSION}/qtum-${QTUM_VERSION}-powerpc64le-linux-gnu.tar.gz"
+
+# Set the default path
+ENV PATH="/usr/local/bin:$PATH"
+
+# Determine the download URL based on architecture
+RUN case "$(uname -m)" in \
+        "aarch64") export QTUM_URL=${QTUM_AARCH64_URL} ;; \
+        "armv7l") export QTUM_URL=${QTUM_ARMV7_URL} ;; \
+        "x86_64") export QTUM_URL=${QTUM_AMD64_URL} ;; \
+        "ppc64le") export QTUM_URL=${QTUM_PPC64LE_URL} ;; \
+        *) echo "Unsupported architecture"; exit 1 ;; \
+    esac && \
+    echo "URL: $QTUM_URL" && \
+    echo "Downloading from $QTUM_URL" && \
+    curl -L $QTUM_URL -o /tmp/qtum.tar.gz
+
+# Verify that the download completed successfully
+RUN if [ -f /tmp/qtum.tar.gz ]; then \
+        echo "Download completed successfully"; \
+    else \
+        echo "Download failed"; \
+        exit 1; \
+    fi
+
+# Inspect the downloaded tar file (optional)
+RUN ls -lh /tmp/qtum.tar.gz && file /tmp/qtum.tar.gz
+
+# Extract the tar file to /usr/local/bin
+RUN tar -vxz -f /tmp/qtum.tar.gz -C /usr/local/bin --strip-components=2 && \
+    ls -lh /usr/local/bin && \
+    ls -lh /usr/local/bin/qtumd
+
+# Expose qtumd's default ports
+EXPOSE 3888 3889 13888 13889 13777 13778
+
+# Run qtumd by default
+CMD ["qtumd"]
+
